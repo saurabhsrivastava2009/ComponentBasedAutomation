@@ -10,10 +10,6 @@ public class Input extends BaseComponent {
         this.mainLocator = inputBy;
     }
 
-    public By getInputBy() {
-        return this.mainLocator;
-    }
-
     public void enterText(String value) {
         Element.enterText(this.mainLocator, value);
     }

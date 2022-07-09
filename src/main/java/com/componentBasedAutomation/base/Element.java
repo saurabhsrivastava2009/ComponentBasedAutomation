@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public interface Element {
@@ -24,10 +24,11 @@ public interface Element {
      * @return the web element for the loadable
      */
     static WebElement waitForElementVisible(By loadableBy) {
-        return new WebDriverWait(driver, 20)
-                .until(
-                        ExpectedConditions.elementToBeClickable(loadableBy)
-                );
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
+        return wait.until(webDriver -> webDriver.findElement(loadableBy));
     }
 
     /**
@@ -38,10 +39,11 @@ public interface Element {
      * @return the web element for the loadable
      */
     static WebElement waitForElementVisible(By loadableBy, int timeOutInSeconds) {
-        return new WebDriverWait(driver, timeOutInSeconds)
+        new WebDriverWait(driver, timeOutInSeconds)
                 .until(
-                        ExpectedConditions.elementToBeClickable(loadableBy)
+                        ExpectedConditions.visibilityOfElementLocated(loadableBy)
                 );
+        return getWebElement(loadableBy);
     }
 
     /**
@@ -53,12 +55,22 @@ public interface Element {
      */
     static WebElement waitForElementVisible(By loadableBy, boolean usePropertyTimeOut) {
         if (usePropertyTimeOut) {
-            return new WebDriverWait(driver, Integer.valueOf(propertyTimeOut))
+            new WebDriverWait(driver, Integer.valueOf(propertyTimeOut))
                     .until(
-                            ExpectedConditions.elementToBeClickable(loadableBy)
+                            ExpectedConditions.visibilityOfElementLocated(loadableBy)
                     );
         }
         return waitForElementVisible(loadableBy);
+    }
+
+    /**
+     * Method to check if element is visible
+     *
+     * @param by - the locator whose visibility you want to check
+     * @return - true if visible else false
+     */
+    static boolean isElementVisible(By by) {
+        return getWebElement(by).isDisplayed();
     }
 
     /**
