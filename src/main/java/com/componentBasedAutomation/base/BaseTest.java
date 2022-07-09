@@ -1,8 +1,12 @@
 package com.componentBasedAutomation.base;
 
+/*
+ * Copyright (c) 2022. Saurabh Srivastava
+ */
+
 import com.componentBasedAutomation.Utilities.CommonFrameworkLogger;
+import com.componentBasedAutomation.webPageComponents.BaseComponent;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -26,11 +30,11 @@ public class BaseTest {
      * Navigate to the specified URL
      *
      * @param url                     - the url to which you want to navigate to
-     * @param destinationPageLoadable - the element expected to load at the page
+     * @param expectedLoadableComponent - the component expected to load at the page
      */
-    public void navigateToPage(String url, By destinationPageLoadable) {
+    public void navigateToPage(String url, BaseComponent expectedLoadableComponent) {
         driver.get(url);
-        Element.waitForElementVisible(destinationPageLoadable);
+        Element.waitForElementVisible(expectedLoadableComponent);
     }
 
     /**

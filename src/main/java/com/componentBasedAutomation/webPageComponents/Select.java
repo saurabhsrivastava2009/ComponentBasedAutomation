@@ -8,7 +8,6 @@ import java.util.List;
 public class Select extends BaseComponent {
 
     public Select(By selectBy) {
-        //this.inputBy = inputBy;
         this.mainLocator = selectBy;
     }
 

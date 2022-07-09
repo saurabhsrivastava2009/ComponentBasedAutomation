@@ -13,16 +13,32 @@ public class DropDown extends BaseComponent {
         this.dropDownOptionsBy = dropDownOptionsBy;
     }
 
-    public void selectOption(String option, By expectedBy) {
-        Element.click(this.mainLocator, this.dropDownOptionsBy);
+    /**
+     * Select the option from the dropdown and wait for the next page component to load, if selection is successful
+     * @param option - the option you want to select
+     * @param component - the page component you want to wait for
+     */
+    public void selectOption(String option, BaseComponent component) {
+        click(this.mainLocator, this.dropDownOptionsBy);
         WebElement selectedOptionElement = Element.getWebElements(this.dropDownOptionsBy).stream().filter(webElement -> webElement.getText().equalsIgnoreCase(option)).findFirst().get();
-        Element.click(selectedOptionElement, expectedBy);
+        Element.click(selectedOptionElement, component);
     }
 
+    /**
+     * Method to select a option from the dropdown without waiting for resulting component
+     * @param option - the option you want to select
+     */
     public void selectOption(String option) {
-        Element.click(this.mainLocator, this.dropDownOptionsBy);
+        click(this.mainLocator, this.dropDownOptionsBy);
         WebElement selectedOptionElement = Element.getWebElements(this.dropDownOptionsBy).stream().filter(webElement -> webElement.getText().equalsIgnoreCase(option)).findFirst().get();
         Element.click(selectedOptionElement);
     }
 
+    private void click(By mainLocator,By dropDownOptionsBy) {
+        Element.click(mainLocator);
+        By main = mainLocator;
+        this.mainLocator = dropDownOptionsBy;
+        Element.waitForElementVisible(this);
+        this.mainLocator = main;
+    }
 }

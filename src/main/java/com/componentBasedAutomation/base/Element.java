@@ -1,5 +1,6 @@
 package com.componentBasedAutomation.base;
 
+import com.componentBasedAutomation.webPageComponents.BaseComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -20,47 +21,47 @@ public interface Element {
     /**
      * Method to Wait for element (for 20 seconds) to be visible
      *
-     * @param loadableBy - the by of the element that you want to wait for
+     * @param component - the component of the page that you want to wait for
      * @return the web element for the loadable
      */
-    static WebElement waitForElementVisible(By loadableBy) {
+    static WebElement waitForElementVisible(BaseComponent component) {
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
-        return wait.until(webDriver -> webDriver.findElement(loadableBy));
+        return wait.until(webDriver -> webDriver.findElement(component.getMainLocator()));
     }
 
     /**
      * Method to Wait for element to be visible based on your custom timeout
      *
-     * @param loadableBy       - the by of the element that you want to wait for
+     * @param component - the component of the page that you want to wait for
      * @param timeOutInSeconds - your own custom timeout
      * @return the web element for the loadable
      */
-    static WebElement waitForElementVisible(By loadableBy, int timeOutInSeconds) {
+    static WebElement waitForElementVisible(BaseComponent component, int timeOutInSeconds) {
         new WebDriverWait(driver, timeOutInSeconds)
                 .until(
-                        ExpectedConditions.visibilityOfElementLocated(loadableBy)
+                        ExpectedConditions.visibilityOfElementLocated(component.getMainLocator())
                 );
-        return getWebElement(loadableBy);
+        return getWebElement(component.getMainLocator());
     }
 
     /**
      * Method to Wait for element to be visible based on the timeout provided at the run time
      *
-     * @param loadableBy         - the by of the element that you want to wait for
+     * @param component - the component of the page that you want to wait for
      * @param usePropertyTimeOut - your own custom timeout provided at the run time
      * @return the web element for the loadable
      */
-    static WebElement waitForElementVisible(By loadableBy, boolean usePropertyTimeOut) {
+    static WebElement waitForElementVisible(BaseComponent component, boolean usePropertyTimeOut) {
         if (usePropertyTimeOut) {
             new WebDriverWait(driver, Integer.valueOf(propertyTimeOut))
                     .until(
-                            ExpectedConditions.visibilityOfElementLocated(loadableBy)
+                            ExpectedConditions.visibilityOfElementLocated(component.getMainLocator())
                     );
         }
-        return waitForElementVisible(loadableBy);
+        return waitForElementVisible(component);
     }
 
     /**
@@ -86,11 +87,11 @@ public interface Element {
      * Method to click and wait for next loadable
      *
      * @param clickableBy   - the element you want to click
-     * @param destinationBy - the element you want to wait for if the click is successful
+     * @param component - the component you want to wait for if the click is successful
      * @return - the destination web element
      */
-    static WebElement click(By clickableBy, By destinationBy) {
-        return click(driver.findElement(clickableBy), destinationBy);
+    static WebElement click(By clickableBy, BaseComponent component) {
+        return click(driver.findElement(clickableBy), component);
     }
 
     /**
@@ -106,12 +107,12 @@ public interface Element {
      * Method to click and wait for the destination or expected by to load
      *
      * @param element       - the element you want to click
-     * @param destinationBy - the destination or expected locator once click is successful
+     * @param component - the destination or expected component once click is successful
      * @return - the destination or expected web element
      */
-    static WebElement click(WebElement element, By destinationBy) {
+    static WebElement click(WebElement element, BaseComponent component) {
         element.click();
-        return waitForElementVisible(destinationBy);
+        return waitForElementVisible(component);
     }
 
     /**

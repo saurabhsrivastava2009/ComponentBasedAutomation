@@ -4,14 +4,10 @@ package com.componentBasedAutomation.webPageComponents;/*
 
 import com.componentBasedAutomation.base.Element;
 import org.openqa.selenium.By;
-import org.testng.Reporter;
-
-import java.util.logging.Logger;
 
 public class CheckBox extends BaseComponent{
 
     public CheckBox(By checkBoxBy) {
-        //this.inputBy = inputBy;
         this.mainLocator = checkBoxBy;
     }
 
@@ -24,7 +20,7 @@ public class CheckBox extends BaseComponent{
             Element.click(this.mainLocator);
         }
         else {
-            Reporter.log("INFO : Checkbox is already selected",true);
+            LOGGER.info("Checkbox is already selected");
         }
     }
 
@@ -33,7 +29,7 @@ public class CheckBox extends BaseComponent{
             Element.click(this.mainLocator);
         }
         else {
-            Reporter.log("INFO : Checkbox already not selected",true);
+            LOGGER.info("Checkbox already not selected");
         }
     }
 }

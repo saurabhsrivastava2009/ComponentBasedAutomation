@@ -4,22 +4,19 @@ import com.componentBasedAutomation.base.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class Button extends BaseComponent{
-
-    private By buttonBy;
-    private By destinationBy;
+public class Button extends BaseComponent {
 
     public Button(By buttonBy) {
-       // this.buttonBy = buttonBy;
         this.mainLocator = buttonBy;
     }
 
     /**
      * Method to click the button and then wait for destination By to load
-     * @param destinationBy
+     *
+     * @param component - the page component you expect to load if the click is successful
      */
-    public WebElement click(By destinationBy){
-        return Element.click(this.mainLocator,destinationBy);
+    public WebElement click(BaseComponent component) {
+        return Element.click(this.mainLocator, component);
     }
 
 }

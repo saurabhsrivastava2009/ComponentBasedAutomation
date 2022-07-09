@@ -1,7 +1,6 @@
 import com.componentBasedAutomation.base.BaseTest;
-import com.componentBasedAutomation.base.BasicDriver;
+import com.componentBasedAutomation.webPageComponents.Input;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,8 +14,7 @@ public class ApplicationCheck extends BaseTest {
 
     @Test
     public void testEdgeDriver(){
-        WebDriver driver = getDriver();
-        navigateToPage("https://www.google.com", By.cssSelector("[aria-label=\"Search\"]"));
-        Assert.assertEquals(driver.getTitle().contains("Google"),true);
+        navigateToPage("https://www.google.com", new Input(By.cssSelector("[aria-label=\"Search\"]")));
+        verify(getPageTitle().contains("Google"),true,"Page title verified");
     }
 }

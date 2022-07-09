@@ -1,9 +1,13 @@
 package com.componentBasedAutomation.webPageComponents;
 
+import com.componentBasedAutomation.Utilities.CommonFrameworkLogger;
 import com.componentBasedAutomation.base.Element;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
 public abstract class BaseComponent implements Element {
+
+    protected static Logger LOGGER = new CommonFrameworkLogger(BaseComponent.class).getLOGGER();
 
     protected By mainLocator;
 

@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 public class Input extends BaseComponent {
 
     public Input(By inputBy) {
-        //this.inputBy = inputBy;
         this.mainLocator = inputBy;
     }
 
