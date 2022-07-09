@@ -5,8 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.penzoi</groupId>
-    <artifactId>ComponentBasedAutomation</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>componentbasedautomation</artifactId>
+    <version>1.2-SNAPSHOT</version>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub saurabhsrivastava2009 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/saurabhsrivastava2009/ComponentBasedAutomation</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
