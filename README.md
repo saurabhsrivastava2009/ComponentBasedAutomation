@@ -4,7 +4,7 @@ Component based framework for Automation
 How to use?
 + Add this dependency in your pom.xml
 
-```pom
+```xml
     <dependency>
     <groupId>org.penzoi</groupId>
     <artifactId>componentbasedautomation</artifactId>
@@ -14,40 +14,40 @@ How to use?
 + Update your settings.xml file <i>~/.m2/settings.xml<i>
 
 ```xml
-    <<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
     http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <activeProfiles>
-    <activeProfile>github</activeProfile>
+        <activeProfile>github</activeProfile>
     </activeProfiles>
 
     <profiles>
-    <profile>
-      <id>github</id>
-      <repositories>
-        <repository>
-          <id>central</id>
-          <url>https://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/saurabhsrivastava2009/ComponentBasedAutomation</url>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/saurabhsrivastava2009/ComponentBasedAutomation</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
     </profiles>
 
     <servers>
-    <server>
-      <id>github</id>
-      <username>USERNAME</username>
-      <password>TOKEN</password>
-    </server>
+        <server>
+            <id>github</id>
+            <username>USERNAME</username>
+            <password>TOKEN</password>
+        </server>
     </servers>
     </settings>
 ```
