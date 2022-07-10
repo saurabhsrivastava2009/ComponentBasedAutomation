@@ -1,3 +1,9 @@
+package UITests;
+
+/*
+ * Copyright (c) 2022. Saurabh Srivastava
+ */
+
 import com.componentBasedAutomation.base.BaseTest;
 import com.componentBasedAutomation.webPageComponents.Input;
 import org.openqa.selenium.By;
